@@ -2,7 +2,7 @@
 
 An AWS S3 command line tool that reads content at a specified s3 key and displays it in the operating system's default pager.
 
-https://travis-ci.com/ishanjayawardena/aws-s3-client.svg?branch=master
+[![Build Status](https://travis-ci.com/ishanjayawardena/aws-s3-client.svg?branch=master)](https://travis-ci.com/ishanjayawardena/aws-s3-client)
 
 ### Howe to build
 ```bash
