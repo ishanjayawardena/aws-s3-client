@@ -9,7 +9,7 @@ import (
 // Represents static config of AWS resources and corresponding application environment
 type awsEnvrionmentInfo struct {
 	// path to the shared credentials file
-	credentialsFile string
+	credentials_file string
 	// Profile name that must be used in AWS SDK clients
 	profile string
 	// Name of the root bucket available for a given application environment
@@ -46,7 +46,7 @@ var envInfo = map[string]struct {
 func getStaticEnvInfo(env string, cred string) (*awsEnvrionmentInfo, error) {
 	var res awsEnvrionmentInfo
 	if senv, ok := envInfo[env]; ok {
-		res.credentialsFile = cred
+		res.credentials_file = cred
 		res.profile = senv.profile
 		res.bucket = senv.bucket
 		res.region = &senv.region
