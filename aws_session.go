@@ -9,6 +9,6 @@ import (
 func createClientSession(env *awsEnvrionmentInfo) *session.Session {
 	return session.Must(session.NewSession(&aws.Config{
 		Region:      env.region,
-		Credentials: credentials.NewSharedCredentials(env.credentials_file, env.profile),
+		Credentials: credentials.NewSharedCredentials(env.credentialsFile, env.profile),
 	}))
 }

@@ -9,7 +9,7 @@ import (
 // Represents static config of AWS resources and corresponding application environment
 type awsEnvrionmentInfo struct {
 	// path to the shared credentials file
-	credentials_file string
+	credentialsFile string
 	// Profile name that must be used in AWS SDK clients
 	profile string
 	// Name of the root bucket available for a given application environment
@@ -20,10 +20,10 @@ type awsEnvrionmentInfo struct {
 
 const (
 	// Profile name used in the staging application environments
-	stg_profile = "staging-profile-name"
+	stgProfile = "staging-profile-name"
 
 	// Profile name used in production application environments
-	prd_profile = "production-profile-name"
+	prdProfile = "production-profile-name"
 )
 
 // AWS regions that are in use
@@ -36,17 +36,17 @@ var envInfo = map[string]struct {
 	bucket  string
 	region  string
 }{
-	"eu-stg":  {stg_profile, "stg-bucket-europe", euRegion},
-	"us-stg":  {stg_profile, "stg-bucket-usa", usRegion},
-	"eu-prod": {prd_profile, "prd-bucket-europe", euRegion},
-	"us-prod": {prd_profile, "prd-bucket-usa", usRegion},
+	"eu-stg":  {stgProfile, "stg-bucket-europe", euRegion},
+	"us-stg":  {stgProfile, "stg-bucket-usa", usRegion},
+	"eu-prod": {prdProfile, "prd-bucket-europe", euRegion},
+	"us-prod": {prdProfile, "prd-bucket-usa", usRegion},
 }
 
 // Returns AWS environment info (ie, sdk client profile name, aws region name, S3 bucket name)
 func getStaticEnvInfo(env string, cred string) (*awsEnvrionmentInfo, error) {
 	var res awsEnvrionmentInfo
 	if senv, ok := envInfo[env]; ok {
-		res.credentials_file = cred
+		res.credentialsFile = cred
 		res.profile = senv.profile
 		res.bucket = senv.bucket
 		res.region = &senv.region
