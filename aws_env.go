@@ -52,5 +52,5 @@ func getStaticEnvInfo(env string, cred string) (*awsEnvrionmentInfo, error) {
 		res.region = &senv.region
 		return &res, nil
 	}
-	return nil, fmt.Errorf("Unsupport application environment: '%s'", env)
+	return nil, fmt.Errorf("unsupport application environment: '%s'", env)
 }

@@ -15,7 +15,7 @@ func displayInPager(msg string) error {
 	err := pager.Run()
 
 	if err != nil {
-		return fmt.Errorf("Pager error: %v", err)
+		return fmt.Errorf("pager '%s' error: %v", pager, err)
 	}
 
 	return nil

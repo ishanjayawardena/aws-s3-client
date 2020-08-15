@@ -30,7 +30,7 @@ func createS3Client(s *session.Session) *s3.S3 {
 func readS3ObjectContent(s3c *s3.S3, req *S3RequestInfo) (*strings.Builder, error) {
 	obj, err := requestS3Object(s3c, req)
 	if err != nil {
-		return nil, fmt.Errorf("S3 Read error: %v", err)
+		return nil, fmt.Errorf("reading S3 object as string: %v", err)
 	}
 
 	return s3ContentAsString(obj)
@@ -49,7 +49,7 @@ func requestS3Object(s3Client *s3.S3, req *S3RequestInfo) (*s3.GetObjectOutput, 
 		return nil, err
 	}
 
-	return nil, fmt.Errorf("S3 error: %v", err)
+	return nil, fmt.Errorf("downloading S3 object %s/%s: %v", req.bucket, req.key, err)
 }
 
 func s3ContentAsString(res *s3.GetObjectOutput) (*strings.Builder, error) {
@@ -57,12 +57,12 @@ func s3ContentAsString(res *s3.GetObjectOutput) (*strings.Builder, error) {
 	n, err := io.Copy(buf, res.Body)
 
 	if err != nil {
-		return nil, fmt.Errorf("S3 response read error: %v", err)
+		return nil, fmt.Errorf("converting S3 response to string: %v", err)
 	}
 	defer res.Body.Close()
 
 	if *res.ContentLength != n {
-		return nil, fmt.Errorf("S3 response read error. Content length doesn't match the read data length")
+		return nil, fmt.Errorf("converting S3 response to string: content length doesn't match the read data length")
 	}
 
 	return buf, nil
